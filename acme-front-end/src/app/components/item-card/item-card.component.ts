@@ -10,6 +10,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ItemCardComponent implements OnInit {
   @Input() item:Item
 
+  disabled: boolean
+  
+
   
 
 
@@ -23,6 +26,14 @@ export class ItemCardComponent implements OnInit {
   transform(){
     console.log(this.item.price)
     return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+this.item.image);
+  }
+
+  addtoCart(){
+    this.item.quantity--;
+    console.log(this.item.quantity)
+    if (this.item.quantity ==0){
+      this.disabled = true;
+    }
   }
 
 }
