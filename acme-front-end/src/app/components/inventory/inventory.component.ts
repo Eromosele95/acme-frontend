@@ -12,9 +12,7 @@ import { share } from 'rxjs/operators'
 export class InventoryComponent implements OnInit {
 
   Items: Item[];
-
   constructor( private itemService: ItemService) { }
-
   ngOnInit(): void {
     
     this.itemService.getAllItems().pipe(share()).subscribe(

@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ItemCardComponent implements OnInit {
   @Input() item:Item
 
-  disabled: boolean
+  disabled: boolean 
   
 
   
@@ -19,7 +19,8 @@ export class ItemCardComponent implements OnInit {
   constructor(private _sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-
+    this.disabled = false;
+    console.log(this.disabled)
   
   }
 
@@ -34,6 +35,11 @@ export class ItemCardComponent implements OnInit {
     if (this.item.quantity ==0){
       this.disabled = true;
     }
+  }
+
+  removefromCart(){
+    this.item.quantity++;
+    this.disabled = false;
   }
 
 }

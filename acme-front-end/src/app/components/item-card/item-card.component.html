@@ -1,14 +1,27 @@
-<div class="  max-w-md rounded overflow-hidden shadow-lg m-5 w-9/12 h-auto">
-    <img class="w-full flex-wrap h-64 w-64" [src]="transform()">
+<div class=" ml-20 m-2 max-w-md rounded overflow-hidden shadow-lg  w-8/12 h-auto">
+  <div *ngIf="disabled" class="bg-gray-600 flex flex-wrap w-full invisible" >
+  </div>
+    <img class="w-full flex-wrap h-64" [src]="transform() ">
    
-      <div class="font-bold text-base mb-2">{{item["title"]}}</div>
+      <div class="font-bold text-base mt-2">{{item["title"]}}</div>
       <div class='text-xs text-center p-5'>{{item["description"]}}</div>
       <p class="text-gray-700 text-base">${{item["price"]}}</p>
+    
     <button class="border-1 p-1 content-center rounded-sm text-center text-white transition duration-500 ease-in-out bg-black hover:bg-gray-100 transform hover:-translate-y-0.5 hover:scale-110 hover:text-black m-5" 
     type="submit"
+    *ngIf="!disabled"
     (click)="addtoCart()"
     [disabled]="item.quantity==0"
     >ADD TO CART</button>
-    <p class="text-gray-700 text-xs text-center">Only {{item["quantity"]}} in stock!</p>
+    <p *ngIf="!disabled" class="text-gray-700 text-xs text-center">Only {{item["quantity"]}} in stock!</p>
+    <button class="border-1 p-1 content-center rounded-sm text-center text-white transition duration-500 ease-in-out bg-red-600 hover:bg-red-600 transform hover:-translate-y-0.5 hover:scale-110" 
+    type="submit"
+    *ngIf="disabled"
+    (click)="removefromCart()"
+    [disabled]="item.quantity>0"
+    >REMOVE ONE ITEM</button>
+    <p *ngIf="disabled" class="text-red-700 text-xs text-center">Item is out of stock!
+      You can only remove one item.
+    </p>
 
   </div>
