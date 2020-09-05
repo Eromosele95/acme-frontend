@@ -3,6 +3,7 @@ import { Item } from 'src/app/model/item';
 import { ItemService } from '../../services/item-service.service'
 import { CartService } from '../../services/cart-service.service'
 import { cartItem } from 'src/app/model/cart';
+import {  Router } from '@angular/router';
 
 
 
@@ -18,40 +19,43 @@ export class InventoryComponent implements OnInit {
 
   
   constructor( private itemService: ItemService,
-              private cartSerive: CartService,
+              private cartService: CartService,
+              private router: Router
+              
     ) { }
   ngOnInit(): void {
-    console.log('hello')
     this.itemService.getAllItems().subscribe(
       data => {
-        console.log(data)
         this.Items = data
         
       }, error => {
         console.log(error)
       }
     )
+
     this.cart = []
-    this.cartSerive.cartSubject.subscribe((data: Item) => {
-
-      console.log(data['title'])
-
-      if(this.cart.length != 0){
-        const found = this.cart.find(t => {  return t.item['title']===data['title']})
-        console.log(found)
-        console.log(this.cart)
-        found['quantity']++
+    this.cartService.cartSubject.subscribe((data: Item) => {
+      if(this.cart.length == 0){
+        this.cart.push({item:data, quantity:1})
+      
       }
       else{
-        this.cart.push({item:data, quantity:0})
+        let found = this.cart.find(t => { return t.item['title']===data['title']})
+        if (found != undefined){
+          found.quantity++
+          console.log(found)
+        }else{
+          this.cart.push({item:data, quantity:1})
+        }
       }
-      
+      this.cartService.cartItemSubject.next(this.cart);
     })
   }
 
-  checkout(){
-    this.cartSerive.cartSubject.next(this.cart);
+  checkout(){ 
+  
     console.log(this.cart)
+    this.router.navigate(['/', 'checkout'])
   }
  
 }

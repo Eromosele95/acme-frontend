@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from '../../services/cart-service.service'
+import { cartItem } from 'src/app/model/cart';
+import { Item } from 'src/app/model/item';
 
 @Component({
   selector: 'app-cart-card',
@@ -8,19 +10,26 @@ import { CartService } from '../../services/cart-service.service'
   styleUrls: ['./cart-card.component.scss']
 })
 export class CartCardComponent implements OnInit {
+  cardItem: cartItem[]
   
 
 
-  constructor(private _sanitizer: DomSanitizer) { }
+  constructor(private _sanitizer: DomSanitizer,
+              private cartservice: CartService,
+              ) { }
 
   ngOnInit(): void {
+    this.cartservice.cartItemSubject.subscribe((data: cartItem[])=> {
+      this.cardItem=data
+
+      console.log(data)
+      // this.cardItem.item = data;
+      // this.cardItem.quantity = data.quantity
+    })
   }
 
-  transform(){
-    return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,');
+  transform(suffix:string){return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+ suffix);
+    
   }
-
-
-  Cart
 
 }

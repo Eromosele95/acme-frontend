@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from 'src/app/model/item';
+import { cartItem } from 'src/app/model/cart';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CartService } from '../../services/cart-service.service'
+
 
 @Component({
   selector: 'app-cart',
@@ -8,11 +11,19 @@ import { Item } from 'src/app/model/item';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
-  cart_items: Item[]
+  constructor(private cartService: CartService
+    ) { }
+  cart: cartItem[]
 
   ngOnInit(): void {
-    
+    console.log("focken service")
+    console.log(this.cart)
+    this.cartService.cartItemSubject.subscribe((data: cartItem[]) => {
+      // console.log(data)
+
+      this.cart = data
+    })
   }
+
 
 }

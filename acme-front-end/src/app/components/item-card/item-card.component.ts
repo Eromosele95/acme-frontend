@@ -31,6 +31,7 @@ export class ItemCardComponent implements OnInit {
 
   addtoCart(){
     this.cartService.cartSubject.next(this.item)
+    
     this.item.quantity--;
     if (this.item.quantity ==0){
       this.disabled = true;
