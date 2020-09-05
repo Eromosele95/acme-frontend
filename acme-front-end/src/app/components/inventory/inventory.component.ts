@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/model/item';
 import { ItemService } from '../../services/item-service.service'
 import { CartService } from '../../services/cart-service.service'
-import { share } from 'rxjs/operators'
+import { cartItem } from 'src/app/model/cart';
+
 
 
 @Component({
@@ -13,10 +14,7 @@ import { share } from 'rxjs/operators'
 export class InventoryComponent implements OnInit {
 
   Items: Item[];
-  cart: [{
-    cart_item: Item,
-    quantity: number
-  }]
+  cart: cartItem[];
 
   
   constructor( private itemService: ItemService,
@@ -33,24 +31,21 @@ export class InventoryComponent implements OnInit {
         console.log(error)
       }
     )
-    this.cart = [{}] as any
-    this.cartSerive.cartSubject.subscribe( (data: Item) => {
-      console.log(data['title'])
-      
-      const found = this.cart.find(t => { t === undefined||
-        t.cart_item['title'] == data['title']})
-      console.log(found)
-      console.log(this.cart)
+    this.cart = []
+    this.cartSerive.cartSubject.subscribe((data: Item) => {
 
-      if(found === undefined){
-        this.cart.push({
-        cart_item: data,
-        quantity:0
-      })
-    }else{
-      // Update Cart Quantity
-      found['quantity']++
-    }
+      console.log(data['title'])
+
+      if(this.cart.length != 0){
+        const found = this.cart.find(t => {  return t.item['title']===data['title']})
+        console.log(found)
+        console.log(this.cart)
+        found['quantity']++
+      }
+      else{
+        this.cart.push({item:data, quantity:0})
+      }
+      
     })
   }
 
