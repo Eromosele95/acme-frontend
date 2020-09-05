@@ -1,11 +1,11 @@
 <div class=" ml-20 m-2 max-w-md rounded overflow-hidden shadow-lg  w-8/12 h-auto">
   <div *ngIf="disabled" class="bg-gray-600 flex flex-wrap w-full invisible" >
   </div>
-    <img class="w-full flex-wrap h-64" [src]="transform() ">
+    <img class="w-full flex-wrap h-64" [src]="transform()">
    
       <div class="font-bold text-base mt-2">{{item["title"]}}</div>
       <div class='text-xs text-center p-5'>{{item["description"]}}</div>
-      <p class="text-gray-700 text-base">${{item["price"]}}</p>
+      <p class="text-gray-700 text-base">${{item["price"]}}.00</p>
     
     <button class="border-1 p-1 content-center rounded-sm text-center text-white transition duration-500 ease-in-out bg-black hover:bg-gray-100 transform hover:-translate-y-0.5 hover:scale-110 hover:text-black m-5" 
     type="submit"
@@ -24,4 +24,5 @@
       You can only remove one item.
     </p>
 
-  </div>
+</div>
+
