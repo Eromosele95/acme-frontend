@@ -11,6 +11,7 @@ import { Item } from 'src/app/model/item';
 })
 export class CartCardComponent implements OnInit {
   cardItem: cartItem[]
+  total: number
   
 
 
@@ -21,6 +22,7 @@ export class CartCardComponent implements OnInit {
   ngOnInit(): void {
     this.cartservice.cartItemSubject.subscribe((data: cartItem[])=> {
       data.forEach((t)=> t.subtotal = t.item.price*t.quantity)
+      this.total = data.reduce((sum:number,curr:cartItem)=> sum+curr.subtotal,0)
       this.cardItem=data
 
       
@@ -35,7 +37,6 @@ export class CartCardComponent implements OnInit {
 
   updateSubTotal(){
     this.cartservice.cartItemSubject.next(this.cardItem)
-    console.log(this.cardItem)
   }
 
 }
