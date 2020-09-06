@@ -2,11 +2,15 @@
 <div *ngFor="let item of cardItem" class=" m-2 flex 
 rounded overflow-hidden shadow-lg w-11/12 h-40 justify-between">
       <img class="w-40 h-40 object-contain" [src]="transform(item.item.image)">
-      <div class=" max-w-sm font-semibold text-black text-sm text-center mr-5">{{ item.item.title}}</div>
-        <div><input class="rounded-lg bg-black text-white w-15 h-10 p-3"
+      <div class=" max-w-sm font-semibold text-black text-sm content-center mr-5">{{ item.item.title}}</div>
+<div>
+          <input class="rounded-lg bg-black text-white w-15 h-10 p-3"
         label='Edit quanity'
-        type="number" min="0" [max]="item.item.quantity"
+        type="number" min="0" [max]="item.item.stock"
         [placeholder]="item.quantity"
-        ><span></span></div>
-        <div class='text-xs text-center p-5'></div>
+        [(ngModel)]="item.quantity"
+         (change)="updateSubTotal()"
+        ><span>x ${{item.item.price.toFixed(2)}} = ${{item.subtotal.toFixed(2)}} </span>
+  </div>
+        <div class='text-lg text-center p-5'></div>
     </div>

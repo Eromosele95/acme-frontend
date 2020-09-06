@@ -45,6 +45,7 @@ export class ItemCardComponent implements OnInit {
    */
   removefromCart(){
     this.disabled = false;
+    this.item.quantity++;
   }
 
 }

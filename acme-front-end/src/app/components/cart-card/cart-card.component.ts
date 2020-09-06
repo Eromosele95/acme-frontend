@@ -20,9 +20,10 @@ export class CartCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartservice.cartItemSubject.subscribe((data: cartItem[])=> {
+      data.forEach((t)=> t.subtotal = t.item.price*t.quantity)
       this.cardItem=data
 
-      console.log(data)
+      
       // this.cardItem.item = data;
       // this.cardItem.quantity = data.quantity
     })
@@ -30,6 +31,11 @@ export class CartCardComponent implements OnInit {
 
   transform(suffix:string){return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+ suffix);
     
+  }
+
+  updateSubTotal(){
+    this.cartservice.cartItemSubject.next(this.cardItem)
+    console.log(this.cardItem)
   }
 
 }

@@ -19,8 +19,7 @@ export class CartComponent implements OnInit {
     console.log("focken service")
     console.log(this.cart)
     this.cartService.cartItemSubject.subscribe((data: cartItem[]) => {
-      // console.log(data)
-
+      
       this.cart = data
     })
   }
