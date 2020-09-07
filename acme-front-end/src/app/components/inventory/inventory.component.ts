@@ -14,7 +14,7 @@ import {  Router } from '@angular/router';
 })
 export class InventoryComponent implements OnInit {
 
-  Items: Item[];
+  items: Item[];
   cart: cartItem[];
 
   
@@ -26,9 +26,17 @@ export class InventoryComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.getAllItems().subscribe(
       data => {
-        this.Items = data
-        
-        
+        if (this.cart.length == 0){
+          this.items =[]
+          data.forEach(item => {
+            this.items.push(Object.assign({},item))
+          });
+          this.items.forEach((item)=>{
+            item.quantityLeft = item.quantity
+            item.stock = item.quantity
+          })
+        } 
+        console.log(this.items)
       }, error => {
         console.log(error)
       }
@@ -36,10 +44,12 @@ export class InventoryComponent implements OnInit {
 
     this.cart = []
     this.cartService.cartSubject.subscribe((data: Item) => {
+
+
       data.price = +data.price.toFixed(2)
-      data.stock = data.quantity
       if(this.cart.length == 0){
         this.cart.push({item:data, quantity:1, subtotal: data.price})
+  
       
       }
       else{
@@ -50,6 +60,7 @@ export class InventoryComponent implements OnInit {
           console.log(found)
         }else{
           this.cart.push({item:data, quantity:1, subtotal:data.price})
+          
         }
       }
       this.cartService.cartItemSubject.next(this.cart);

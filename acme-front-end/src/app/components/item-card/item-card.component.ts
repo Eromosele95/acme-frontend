@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from 'src/app/model/item';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from '../../services/cart-service.service'
+import { cartItem } from 'src/app/model/cart';
 
 @Component({
   selector: 'app-item-card',
@@ -31,9 +32,8 @@ export class ItemCardComponent implements OnInit {
 
   addtoCart(){
     this.cartService.cartSubject.next(this.item)
-    
-    this.item.quantity--;
-    if (this.item.quantity ==0){
+    this.item.quantityLeft--;
+    if(this.item.quantityLeft == 0){
       this.disabled = true;
     }
 
@@ -45,7 +45,7 @@ export class ItemCardComponent implements OnInit {
    */
   removefromCart(){
     this.disabled = false;
-    this.item.quantity++;
+    this.item.quantityLeft++;
   }
 
 }

@@ -5,5 +5,4 @@ export class cartItem {
     quantity:number
     subtotal:number 
 
-
 }

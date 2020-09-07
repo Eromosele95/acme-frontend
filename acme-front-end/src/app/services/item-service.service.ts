@@ -13,17 +13,27 @@ const httpOptions = {
 export class ItemService {
 
   private getAllItemsUrl: string;
-  private checkout: string;
+  private checkoutUrl: string;
+
 
   
 
   constructor(private http: HttpClient) {
     this.getAllItemsUrl= 'http://localhost:8080/AllItems'
+    this.checkoutUrl = 'http://localhost:8080/checkout'
+  
    }
 
   public getAllItems():Observable<any> {
     return this.http.get(this.getAllItemsUrl,httpOptions);
   }
+
+  public postItems(data){
+    return this.http.post(this.checkoutUrl, data);
+
+  }
+
+  public p
 
   
   
