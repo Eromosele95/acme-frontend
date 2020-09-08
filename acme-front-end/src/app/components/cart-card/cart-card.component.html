@@ -22,13 +22,16 @@ rounded overflow-hidden shadow-lg w-11/12 h-32 justify-around">
         placeholder="example@gmail.com"
         id="checkoutEmail"
         name="checkoutEmail"
+        required
+        email
         ngModel
         >
         <div *ngIf="!f.valid">
-          <span class='sml-txt-gray'>Please Enter a valid Email</span>
+          <span class='text-xs text-red-500 m-3'>Please Enter a valid Email</span>
       </div>
         <button class="border-1 p-1 content-center rounded-sm text-center text-gray-900 transition duration-500 ease-in-out hover:bg-red-600 bg-white transform hover:-translate-y-0.5 hover:scale-110"
         type="submit"
+        [disabled]=!f.valid
         >
           CHECKOUT</button>
       </form>
@@ -37,3 +40,4 @@ rounded overflow-hidden shadow-lg w-11/12 h-32 justify-around">
     </div>
 
   </div>
+ 

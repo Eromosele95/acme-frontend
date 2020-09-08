@@ -11,7 +11,8 @@ import { ItemCardComponent } from './components/item-card/item-card.component';
 import { ItemService } from './services/item-service.service';
 import { CartService } from './services/cart-service.service'
 import { CartComponent } from './components/cart/cart.component';
-import { CartCardComponent } from './components/cart-card/cart-card.component'
+import { CartCardComponent } from './components/cart-card/cart-card.component';
+import { ConfirmedOrderComponent } from './components/confirmed-order/confirmed-order.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CartCardComponent } from './components/cart-card/cart-card.component'
     InventoryComponent,
     ItemCardComponent,
     CartComponent,
-    CartCardComponent
+    CartCardComponent,
+    ConfirmedOrderComponent
   ],
   imports: [
     BrowserModule,

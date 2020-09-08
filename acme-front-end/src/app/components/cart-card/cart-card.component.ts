@@ -5,6 +5,7 @@ import { ItemService } from '../../services/item-service.service'
 import { cartItem } from 'src/app/model/cart';
 import { Item } from 'src/app/model/item';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-cart-card',
@@ -20,7 +21,8 @@ export class CartCardComponent implements OnInit {
 
   constructor(private _sanitizer: DomSanitizer,
               private cartservice: CartService,
-              private itemservice: ItemService
+              private itemservice: ItemService,
+              private router: Router
               ) { }
 
   ngOnInit(): void {
@@ -65,7 +67,9 @@ export class CartCardComponent implements OnInit {
     //   'items': this.cardItem[0].
     // }
     this.itemservice.postItems(order).subscribe(
-      (data) => {console.log(data)},
+      (data) => {console.log(data)
+        this.router.navigate(['/', 'confirmed'])
+      },
       (error)=>{ console.log(error)}
       );
     // this.router.navigate(['/', 'confirmed'])

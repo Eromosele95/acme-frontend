@@ -29,14 +29,8 @@ export class ItemService {
   }
 
   public postItems(data){
-    return this.http.post(this.checkoutUrl, data);
-
+    return this.http.post(this.checkoutUrl,data);
   }
-
-  public p
-
-  
-  
 
 
 
