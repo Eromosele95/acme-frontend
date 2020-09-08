@@ -14,19 +14,26 @@ rounded overflow-hidden shadow-lg w-11/12 h-32 justify-around">
   </div>
     </div>
     <div class='m-5 h-auto flex justify-between'>
-      <form>
+      <form (ngSubmit)="confirmOrder(f)" #f="ngForm" >
         <label for="email">Send Receipt to:</label>
         <input
         class="rounded-lg bg-gray-200 text-gray-900 w-15 h-10 m-5 p-3"
         type="text"
         placeholder="example@gmail.com"
-        id="email"
+        id="checkoutEmail"
+        name="checkoutEmail"
+        ngModel
         >
+        <div *ngIf="!f.valid">
+          <span class='sml-txt-gray'>Please Enter a valid Email</span>
+      </div>
+        <button class="border-1 p-1 content-center rounded-sm text-center text-gray-900 transition duration-500 ease-in-out hover:bg-red-600 bg-white transform hover:-translate-y-0.5 hover:scale-110"
+        type="submit"
+        >
+          CHECKOUT</button>
       </form>
       <span class='text-lg text-center text-gray-900 p-5'
       >TOTAL AMOUNT: ${{ total }}</span>
     </div>
-    <button class="border-1 p-1 content-center rounded-sm text-center text-gray-900 transition duration-500 ease-in-out hover:bg-red-600 bg-white transform hover:-translate-y-0.5 hover:scale-110">
-      CHECKOUT</button>
 
   </div>

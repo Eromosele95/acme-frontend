@@ -16,6 +16,7 @@ export class InventoryComponent implements OnInit {
 
   items: Item[];
   cart: cartItem[];
+ 
 
   
   constructor( private itemService: ItemService,
@@ -68,7 +69,6 @@ export class InventoryComponent implements OnInit {
   }
 
   checkout(){ 
-  
     console.log(this.cart)
     this.router.navigate(['/', 'checkout'])
   }

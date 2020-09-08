@@ -47,5 +47,6 @@ export class ItemCardComponent implements OnInit {
     this.disabled = false;
     this.item.quantityLeft++;
   }
+  
 
 }
